@@ -1,0 +1,75 @@
+<section class="container">
+  <div class="row p-5">
+    <div class="col-sm-7 mx-auto">
+
+      <div class="card shadow-lg">
+        <div class="card-header">
+          <div class="d-flex align-items-center">
+            <h5 class="mx-auto w-100">Sign in to Angular</h5>
+            <h5><i class="fa fa-key text-success"></i></h5>
+          </div>
+        </div>
+
+
+        <div class="card-body">
+          <form #formLogin="ngForm" (ngSubmit)="formLogin.form.valid && sendInfo(formLogin)" novalidate>
+            <div class="form-group mx-auto">
+
+              <div class="col-sm-12 mb-3">
+                <input class="form-control" type="text" name="email" id="email" placeholder="Email"
+                  [(ngModel)]="objUser.email" style="border-radius: 2rem;" #email="ngModel"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  [ngClass]="{'is-invalid': formLogin.submitted && email.invalid}" minlength="15" required />
+                <div class="invalid-feedback" *ngIf="formLogin.submitted && email.invalid">
+                  <small>
+                    <span class="text-danger" *ngIf="email?.errors?.required">The user's email is requires</span>
+                  </small>
+                  <small>
+                    <span class="text-danger" *ngIf="email?.errors?.minlength">Minimun 15 characters</span>
+                  </small>
+                  <small>
+                    <span class="text-danger" *ngIf="email?.errors?.pattern">The pattern is incorrect</span>
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-sm-12 my-3">
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password"
+                  [(ngModel)]="objUser.password" style="border-radius: 2rem;" #password="ngModel"
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$"
+                  [ngClass]="{'is-invalid': formLogin.submitted && password.invalid}" minlength="8" maxlength="15"
+                  required />
+                <!--https://es.stackoverflow.com/questions/4300/expresiones-regulares-para-contrase%C3%B1a-en-base-a-una-politica-->
+                <div class="invalid-feedback" *ngIf="formLogin.submitted && password.invalid">
+                  <small>
+                    <span class="text-danger" *ngIf="password?.errors?.required">The user's password is requires</span>
+                  </small>
+                  <small>
+                    <span class="text-danger" *ngIf="password?.errors?.minlength">Minimun 8 characters</span>
+                  </small>
+                  <small>
+                    <span class="text-danger" *ngIf="password?.errors?.maxlength">Maximun 15 characters</span>
+                  </small>
+                  <small>
+                    <span class="text-danger" *ngIf="password?.errors?.pattern">The pattern is incorrect</span>
+                  </small>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group mx-auto col-sm-10 my-3">
+              <!--<button class="btn btn-block btn-dark" style="border-radius: 2rem;" [routerLink]="['/validate']"
+                type="submit">Sign In</button>-->
+              <button class="btn btn-block btn-danger" style="border-radius: 2rem;" type="submit">Sign In</button>
+              <button class="btn btn-block btn-outline-info" style="border-radius: 2rem;"
+                [routerLink]="['/home']">Return to home</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

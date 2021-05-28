@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><img class="pr-2" src="./assets/img/SantotoEscudo.png" alt="logoUSTA"
+      height="50px">{{ title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Inicio</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Docentes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/professor/view']">Listar docentes</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/professor/create']">Agregar docentes</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/professor/admin']">Administrar docente</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Universidades
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/university/view']">Listar universidades</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/university/create']">Agregar universidad</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/university/admin']">Administrar universidades</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Inf. pública
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/external/professor']">Docentes</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/external/university']">Universidades</a>
+        </div>
+      </li>
+    </ul>
+
+    <span class="navbar-text">
+      <a [routerLink]="['/access']">Sign In</a>
+    </span>
+  </div>
+</nav>

@@ -1,0 +1,54 @@
+<div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+      <li class="breadcrumb-item"><a href="javascript:void(0)">Professors</a></li>
+      <li class="breadcrumb-item active" aria-current="page">View</li>
+    </ol>
+  </nav>
+</div>
+
+<!--Start Pagination-->
+<div class="row justify-content-md-center">
+  <div class="col-md-4 text-left" style="padding: 5px;">
+    <small><b>{{ amountTotalRecords }}</b> Records found in <b>{{ amountTotalPages }}</b> pages</small>
+  </div>
+  <div class="col-md-7 text-right" style="padding: 5px;">
+    <small>
+      <pagination-controls id="paginationProfessor" (pageChange)="actualPage=$event" [maxSize]="10"
+        [directionLinks]="true" previousLabel="Previous" nextLabel="Next"></pagination-controls>
+    </small>
+  </div>
+</div>
+<!--End Pagination-->
+
+
+<div class="row justify-content-md-center">
+  <table class="table table-hover col-md-11">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">COD</th>
+        <th scope="col">Document</th>
+        <th scope="col">Name</th>
+        <th scope="col">Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let objProf of arrayProfessors |
+              paginate:{
+                  id: 'paginationProfessor',
+                  itemsPerPage: amountShowRecords,
+                  currentPage: actualPage,
+                  totalItems: amountTotalRecords
+              }; let i=index">
+        <th scope="row">{{ objProf.cod }}</th>
+        <td>{{ objProf.document }}</td>
+        <td>{{ objProf.nameProfessor }}</td>
+        <td>
+          <img [src]="objProf.photoBase64" alt="Without Photo" class="img-thumbnail" style="height: 50px; width: 50px;"
+            onerror="this.src='../assets/img/withoutPhoto.png'" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+  <div *ngIf="amountProfessors > 0; then showData; else emptyMessage"></div>
+</div>
+
+<ng-template #showData>
+  <div class="row">
+    <div class="col-md-8 p-1">
+      <table class="table table-bordered table-sm table-hover">
+        <thead>
+          <tr>
+            <th style="width: 10%;">Num</th>
+            <th style="width: 50%;">Name University</th>
+            <th style="width: 40%;">Name Professor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let objUnivProfe of arrayUniversitiesProfessors; let i = index"
+            (click)="selectUniversityProfessor(objUnivProfe)"
+            [class.table-info]="objUnivProfe == selectedUniversityProfessor">
+            <td>{{ i }}</td>
+            <td>{{ objUnivProfe.codUniversity.nameUniversity }}</td>
+            <td>{{ objUnivProfe.codProfessor.nameProfessor }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4 pr-0">
+      <div *ngIf="selectedUniversityProfessor.codUniversity.cod != 0" class="bg-light p-3">
+        <div class="row">
+          <label class="col-sm-3 text-success"><small>University's name:</small></label>
+          <div class="col-md-9">{{ selectedUniversityProfessor.codUniversity.nameUniversity }}</div>
+        </div>
+        <div class="row">
+          <label class="col-sm-3 text-success"><small>Logo:</small></label>
+          <div class="col-md-9 text-center mt-2">
+            <img class="img-thumbnail" style="width: 200px; height: 100%;"
+              [src]="selectedUniversityProfessor.codUniversity.logoBase64"
+              onerror="this.src='../assets/img/withoutLogo.png'" alt="Error in photo">
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-sm-3 text-success"><small>Professor's name:</small></label>
+          <div class="col-md-9">{{ selectedUniversityProfessor.codProfessor.nameProfessor }}</div>
+        </div>
+        <div class="row mt-3">
+          <label class="col-sm-3 text-success"><small>Professor's Document:</small></label>
+          <div class="col-md-9">{{ selectedUniversityProfessor.codProfessor.document }}</div>
+        </div>
+        <div class="row">
+          <label class="col-sm-3 text-success"><small>Photo:</small></label>
+          <div class="col-md-9 text-center mt-2">
+            <img class="img-thumbnail" style="width: 200px; height: 100%;"
+              [src]="selectedUniversityProfessor.codProfessor.photoBase64"
+              onerror="this.src='../assets/img/withoutPhoto.png'" alt="Error in photo">
+          </div>
+
+          <div class="row mt-5 mx-3">
+            <button class="btn btn-block btn-outline-danger" type="submit"
+              (click)="openModal(modalDelete, selectedUniversityProfessor)">
+              Remove Association
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #emptyMessage>
+  <div class="row justify-content-md-center">
+    <div class="alert alert-danger mt-3">
+      No hay profesores para esta universidad
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <button class="btn btn-outline-info" [routerLink]="['/university/associate-with-professors']"
+      routerLinkActive="router-link-active">Associate University with Professor</button>
+  </div>
+</ng-template>
+
+
+<!--Ventana Modal para confirmación de eliminación-->
+<ng-template #modalDelete>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ modalText }} <br /><br />
+    <b>University's name: </b>{{ modalUniversity }}<br />
+    <b>Professor's Name: </b>{{ modalProfessor }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-light" (click)="cancelDelete()">Cancel</button>
+    <button type="button" class="btn btn-outline-danger" (click)="delete()">Delete</button>
+  </div>
+</ng-template>

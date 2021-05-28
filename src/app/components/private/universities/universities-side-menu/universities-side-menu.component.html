@@ -1,0 +1,17 @@
+<nav id="side-menu">
+    <div class="list-group">
+
+        <a class="list-group-item list-group-item-action list-group-item-dark" style="padding-bottom: 7px; padding-top: 7px" [routerLink]="['/external/university/university-detail', 0]" routerLinkActive="active">
+      Universities
+    </a>
+        <small>
+      <a *ngFor="let objUniversity of arrayUniversities; let i = index" class="list-group-item list-group-item-action"
+        style="padding-bottom: 5px; padding-top: 5px" [routerLink]="['/external/university/university-detail',
+        objUniversity.cod]"
+        [class.list-group-item-info]="objUniversity == objSelectedUniversity" (click)="selectUniversity(objUniversity)">
+        {{ i+1 }}. {{ objUniversity.nameUniversity }}
+      </a>
+    </small>
+
+    </div>
+</nav>

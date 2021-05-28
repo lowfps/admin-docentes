@@ -1,0 +1,64 @@
+<div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+      <li class="breadcrumb-item"><a href="javascript:void(0)">Universities</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/university/admin']">ADMIN</a></li>
+      <li class="breadcrumb-item" aria-current="page">Edit</li>
+    </ol>
+  </nav>
+</div>
+
+
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
+    <div class="card">
+      <h5 class="card-header bg-dark text-white dark-background">Edit of Universities</h5>
+      <div class="card-body">
+        <form #formEdit="ngForm" (ngSubmit)="formEdit.form.valid && sendInfo(formEdit)" novalidate>
+
+          <div class="form-group">
+            <label for="nameUniversity">University's name:</label>
+            <input type="text" class="form-control" id="nameUni" name="nameUni"
+              [(ngModel)]="objUniversity.nameUniversity" #nameUni="ngModel"
+              [ngClass]="{'is-invalid': formEdit.submitted && nameUni.invalid}" required minlength="10" />
+            <div class="invalid-feedback" *ngIf="formEdit.submitted && nameUni.invalid">
+              <span *ngIf="nameUni?.errors?.required">The University's name is required</span>
+              <span *ngIf="nameUni?.errors?.minlength">Minimun 10 characters</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="logoUni">University's Logo</label>
+            <div class="input-group">
+              <input type="text" class="form-control form-control-sm" id="logoUni" name="logoUni"
+                [(ngModel)]="objUniversity.logo" #logoUni="ngModel"
+                [ngClass]="{'is-invalid': formEdit.submitted && logoUni.invalid}" required
+                accept="image/x-png, image/jpeg, image/gif" />
+              <button class="btn btn-outline-info btn-sm" type="button" (click)="fileInput.click()">
+                <span>+</span>
+                <input type="file" (change)="selectedPhoto($event)" style="display: none;" #fileInput>
+              </button>
+              <div class="invalid-feedback" *ngIf="formEdit.submitted && logoUni.invalid">
+                <span *ngIf="logoUni?.errors?.required">The University's logo is required</span>
+              </div>
+            </div>
+
+
+            <!--Logo-->
+            <div class="text-left mt-3">
+              <img [src]="objUniversity.logoBase64" alt="Image not Found"
+                onerror="this.src='../assets/img/withoutLogo.png'" class="img-thumbnail"
+                style="width: 300px; height: 100%;" />
+            </div>
+
+            <div class="text-right">
+              <button class="btn btn-outline-dark text-right" type="submit">Update University</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
